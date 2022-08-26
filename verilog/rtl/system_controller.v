@@ -160,7 +160,7 @@ module system_controller
   genvar I;
   generate
     for(I=0;I<NUM_OF_DRIVERS;I=I+1)
-    begin
+    begin : gen0
       always@(posedge clock)
       begin
         /*case({reset_n,cmd_section})

@@ -30,9 +30,9 @@ module controller_core
 )
 (
   // logic analizer inputs
-  input  wire [7:0]               la_data_in,
+  input  wire [7+NUM_OF_DRIVERS:0]               la_data_in,
   //output wire [127:0]               la_data_out,
-  input  wire [7:0]               la_oenb,
+  input  wire [7+NUM_OF_DRIVERS:0]               la_oenb,
   // clock
   input wire                        clock,
   // user control of IO
@@ -98,7 +98,6 @@ module controller_core
 
   wire update_cycle_complete;
   wire          timer_enable;
-  wire          clock;
   reg [1:0]     latch_data_sync;
   wire          latch_data_s;
   reg [1:0]     control_trigger_sync;
@@ -167,7 +166,7 @@ module controller_core
   genvar I;
   generate
   for(I=0;I<NUM_OF_DRIVERS;I=I+1'b1)
-  begin
+  begin : gen_io_driver
     always@(posedge clock)
     begin
       io_driver_io_oeb[I]            = (~la_oenb[8+I]) ? la_data_in[8+I] : 1'b0;
