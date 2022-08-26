@@ -31,7 +31,7 @@ module spi_controller(
   output wire miso,
   //input wire data_valid_n,
   output wire [31:0] data_out,
-  output wire clock_out,
+  output wire clock_out
   //input wire [31:0] data_in
 );
 
