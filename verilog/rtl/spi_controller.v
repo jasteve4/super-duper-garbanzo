@@ -24,14 +24,15 @@
  */
 module spi_controller(
   input wire clock,
-  input wire enable_sn,
+  //input wire enable_sn,
   input wire sclk,
   input wire mosi,
   input wire ss_n,
   output wire miso,
-  input wire data_valid_n,
+  //input wire data_valid_n,
   output wire [31:0] data_out,
-  input wire [31:0] data_in
+  output wire clock_out,
+  //input wire [31:0] data_in
 );
 
   reg [2:0] sclk_reg;
@@ -41,6 +42,8 @@ module spi_controller(
   wire sclk_rising_edge;
   wire ss_n_enable;
   wire mosi_data;
+
+  assign clock_out = clock;
 
   always@(posedge clock)
   sclk_reg <= {sclk_reg[1:0],sclk};
