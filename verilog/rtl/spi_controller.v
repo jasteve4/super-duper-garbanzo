@@ -24,24 +24,37 @@
  */
 module spi_controller(
   input wire clock,
-  //input wire enable_sn,
-  input wire sclk,
-  input wire mosi,
-  input wire ss_n,
-  output wire miso,
-  //input wire data_valid_n,
   output wire [31:0] data_out,
-  output wire clock_out
-  //input wire [31:0] data_in
+  output wire clock_out,
+  output wire miso,
+  output reg  miso_oeb,
+  input wire  mosi,
+  output reg  mosi_oeb,
+  input wire  ss_n,
+  output reg  ss_n_oeb,
+  input wire  sclk,
+  output reg  sclk_oeb,
+  output reg  [3:0] la_oenb,
+  input  wire [3:0] la_data_in
 );
 
   reg [2:0] sclk_reg;
   reg [2:0] ss_n_reg;
   reg [2:0] mosi_reg;
   reg [31:0] spi_data;
+
   wire sclk_rising_edge;
   wire ss_n_enable;
   wire mosi_data;
+
+
+  always@(posedge clock)
+  begin
+    miso_oeb      = (~la_oenb[0]) ? la_data_in[0]   : 1'b1;       
+    mosi_oeb      = (~la_oenb[1]) ? la_data_in[1]   : 1'b0;       
+    ss_n_oeb      = (~la_oenb[2]) ? la_data_in[2]   : 1'b0;       
+    sclk_oeb      = (~la_oenb[3]) ? la_data_in[3]   : 1'b0;       
+  end
 
   assign clock_out = clock;
 
