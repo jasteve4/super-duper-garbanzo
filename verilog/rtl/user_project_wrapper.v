@@ -224,7 +224,11 @@ module user_project_wrapper #(
 //  assign io_out[1]                 = 0;
 //  assign io_out[0]                 = 0;
 
-  spi_controller spi_mod(
+  spi_controller spi_controller_mod(
+`ifdef USE_POWER_PINS
+    .vccd1                           (vccd1                         ),
+    .vssd1                           (vssd1                         ),
+`endif
     .clock            (user_clock2),
     .data_out         (spi_data),
     .clock_out        (spi_data_clock),
@@ -250,7 +254,7 @@ module user_project_wrapper #(
   )
   controller_core_mod
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -302,7 +306,7 @@ module user_project_wrapper #(
   )
   driver_core_0
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -332,7 +336,7 @@ module user_project_wrapper #(
   )
   driver_core_1
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -362,7 +366,7 @@ module user_project_wrapper #(
   )
   driver_core_2
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -392,7 +396,7 @@ module user_project_wrapper #(
   )
   driver_core_3
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -422,7 +426,7 @@ module user_project_wrapper #(
   )
   driver_core_4
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -452,7 +456,7 @@ module user_project_wrapper #(
   )
   driver_core_5
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -482,7 +486,7 @@ module user_project_wrapper #(
   )
   driver_core_6
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -512,7 +516,7 @@ module user_project_wrapper #(
   )
   driver_core_7
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -542,7 +546,7 @@ module user_project_wrapper #(
   )
   driver_core_8
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
@@ -572,7 +576,7 @@ module user_project_wrapper #(
   )
   driver_core_9
   (
-`ifdef SYNTHESIS
+`ifdef USE_POWER_PINS
     .vccd1                           (vccd1                         ),
     .vssd1                           (vssd1                         ),
 `endif
