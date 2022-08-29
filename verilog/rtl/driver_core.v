@@ -31,7 +31,7 @@ module driver_core
 (
   input wire                           clock,
   input wire                           clock_a,
-  input   wire [2*MEM_ADDRESS_LENGTH-1:0] mem_address_a,
+  input   wire [9:0]                   mem_address_a,
   input wire                           mem_write_n_a,
   input wire  [MEM_ADDRESS_LENGTH-1:0] row_select_a,
   input wire  [MEM_ADDRESS_LENGTH-1:0] col_select_a,
@@ -42,7 +42,7 @@ module driver_core
   output wire [1:0]                    driver_io
 );
 
-  wire [2*MEM_ADDRESS_LENGTH-1:0] mem_address;
+  wire [9:0]                     mem_address;
   wire                           mem_write_n;
   wire  [MEM_ADDRESS_LENGTH-1:0] row_select;
   wire  [MEM_ADDRESS_LENGTH-1:0] col_select;
@@ -63,7 +63,7 @@ module driver_core
   end
 
 
-  async_reg  mem_address_trans[2*MEM_ADDRESS_LENGTH-1:0](
+  async_reg  mem_address_trans[9:0](
     .clock_async        (clock_a),
     .clock_sync         (clock),
     .data_async         (mem_address_a),

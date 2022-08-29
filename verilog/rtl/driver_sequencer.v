@@ -29,7 +29,7 @@ module driver_sequencer
 )
 (
   input   wire                            clock,
-  input   wire [2*MEM_ADDRESS_LENGTH-1:0] mem_address,
+  input   wire [9:0] mem_address,
   input   wire                            mem_write_n,
   input   wire [MEM_ADDRESS_LENGTH-1:0]   row_select,
   input   wire [MEM_ADDRESS_LENGTH-1:0]   col_select,
@@ -58,8 +58,8 @@ module driver_sequencer
   wire [MEM_ADDRESS_LENGTH-1:0]           current_data_idx;
 
 
-  wire [MEM_ADDRESS_LENGTH+MEM_ADDRESS_LENGTH-1:0]         mem_offset;
-  wire [MEM_ADDRESS_LENGTH+MEM_ADDRESS_LENGTH-1:0]         active_mem_offset;
+  wire [9:0]         mem_offset;
+  wire [9:0]         active_mem_offset;
   wire [MEM_ADDRESS_LENGTH-1:0]           driver_mem_offset;
   reg [15:0]                              mem [0:SYS_MEM_BOUND];
   reg [15:0]                              active_mem;
@@ -71,13 +71,14 @@ module driver_sequencer
   generate
     for(I=0;I<SYS_MEM_BOUND+1;I++) begin : mem_gen
       always@(posedge clock) begin
-        mem[I] <= (I==mem_address) && mem_write_n ? data_in : mem[I];
+        //mem[I] <= (I==mem_address) ? mem_write_n ? mem[I] : data_in : mem[I];
+        mem[I] <= (I==mem_address) && (mem_write_n == 0) ? data_in : mem[I];
       end
     end
   endgenerate
 
   assign mem_offset  = ((row_select<<MEM_ADDRESS_LENGTH) - (row_select<<4))  + col_select; 
-  assign active_mem_offset = ACTIVE_MEM_LOWER_BOUND+mem_offset[MEM_ADDRESS_LENGTH+MEM_ADDRESS_LENGTH-1:4];
+  assign active_mem_offset = ACTIVE_MEM_LOWER_BOUND+mem_offset[9:4];
 
   always@(posedge clock) begin
     active_mem <= mem[active_mem_offset]; // should output be active 

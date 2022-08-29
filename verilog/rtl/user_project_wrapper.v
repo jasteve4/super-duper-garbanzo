@@ -112,21 +112,15 @@ module user_project_wrapper #(
   wire [NUM_OF_DRIVERS-1:0]   io_driver_io_oeb;
   wire [NUM_OF_DRIVERS*2-1:0] driver_io;
 
-  wire  [2:0]                    mask_select_right;
-  wire  [2:0]                    mask_select_left;
-  wire  [6:0]                    mem_address_right;
-  wire  [6:0]                    mem_address_left;
+  wire  [9:0]                    mem_address_right;
+  wire  [9:0]                    mem_address_left;
   wire  [NUM_OF_DRIVERS-1:0]     mem_write_n;
-  wire  [NUM_OF_DRIVERS-1:0]     mem_dot_write_n;
   wire  [MEM_ADDRESS_LENGTH-1:0] row_select_right;
   wire  [MEM_ADDRESS_LENGTH-1:0] row_select_left;
   wire  [MEM_ADDRESS_LENGTH-1:0] col_select_right;
   wire  [MEM_ADDRESS_LENGTH-1:0] col_select_left;
-  wire  [6:0]                    mem_sel_col_address_right;
-  wire  [6:0]                    mem_sel_col_address_left;
   wire  [15:0]                   data_out_right;
   wire  [15:0]                   data_out_left;
-  wire  [NUM_OF_DRIVERS-1:0]     mem_sel_write_n;
   wire  [NUM_OF_DRIVERS-1:0]     row_col_select;
   wire                           output_active_right;
   wire                           output_active_left;
@@ -271,21 +265,15 @@ module user_project_wrapper #(
     .io_update_cycle_complete_out    (io_update_cycle_complete_out  ),
     .io_update_cycle_complete_oeb    (io_update_cycle_complete_oeb  ),
 
-    .mask_select_right               (mask_select_right             ),                                        
-    .mask_select_left                (mask_select_left              ),                                      
     .mem_address_right               (mem_address_right             ),                                       
     .mem_address_left                (mem_address_left              ),                                      
     .mem_write_n                     (mem_write_n                   ),                                 
-    .mem_dot_write_n                 (mem_dot_write_n               ),                                     
     .row_select_right                (row_select_right              ),                                      
     .row_select_left                 (row_select_left               ),                                     
     .col_select_right                (col_select_right              ),                                      
     .col_select_left                 (col_select_left               ),                                     
-    .mem_sel_col_address_right       (mem_sel_col_address_right     ),                                               
-    .mem_sel_col_address_left        (mem_sel_col_address_left      ),                                              
     .data_out_right                  (data_out_right                ),                                    
     .data_out_left                   (data_out_left                 ),                                   
-    .mem_sel_write_n                 (mem_sel_write_n               ),                                     
     .row_col_select                  (row_col_select                ),                                    
     .output_active_right             (output_active_right           ),                                         
     .output_active_left              (output_active_left            ),                                        
@@ -312,15 +300,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[0]                 ),
     .clock_a                        (clock_out[0]                 ),
-    .mask_select_a                  (mask_select_left             ),
-    .mem_address_a                  (mem_address_left[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_left             ),
     .mem_write_n_a                  (mem_write_n[0]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[0]           ),
     .row_select_a                   (row_select_left              ),
     .col_select_a                   (col_select_left              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_left[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_left                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[0]           ),
     .row_col_select_a               (row_col_select[0]            ), 
     .output_active_a                (output_active_left           ),
     .inverter_select_a              (inverter_select[0]           ),
@@ -342,15 +326,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[1]                 ),
     .clock_a                        (clock_out[1]                 ),
-    .mask_select_a                  (mask_select_left             ),
-    .mem_address_a                  (mem_address_left[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_left             ),
     .mem_write_n_a                  (mem_write_n[1]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[1]           ),
     .row_select_a                   (row_select_left              ),
     .col_select_a                   (col_select_left              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_left[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_left                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[1]           ),
     .row_col_select_a               (row_col_select[1]            ), 
     .output_active_a                (output_active_left           ),
     .inverter_select_a              (inverter_select[1]           ),
@@ -372,15 +352,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[2]                 ),
     .clock_a                        (clock_out[2]                 ),
-    .mask_select_a                  (mask_select_left             ),
-    .mem_address_a                  (mem_address_left[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_left             ),
     .mem_write_n_a                  (mem_write_n[2]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[2]           ),
     .row_select_a                   (row_select_left              ),
     .col_select_a                   (col_select_left              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_left[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_left                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[2]           ),
     .row_col_select_a               (row_col_select[2]            ), 
     .output_active_a                (output_active_left           ),
     .inverter_select_a              (inverter_select[2]           ),
@@ -402,15 +378,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[3]                 ),
     .clock_a                        (clock_out[3]                 ),
-    .mask_select_a                  (mask_select_left             ),
-    .mem_address_a                  (mem_address_left[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_left             ),
     .mem_write_n_a                  (mem_write_n[3]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[3]           ),
     .row_select_a                   (row_select_left              ),
     .col_select_a                   (col_select_left              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_left[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_left                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[3]           ),
     .row_col_select_a               (row_col_select[3]            ), 
     .output_active_a                (output_active_left           ),
     .inverter_select_a              (inverter_select[3]           ),
@@ -432,15 +404,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[4]                 ),
     .clock_a                        (clock_out[4]                 ),
-    .mask_select_a                  (mask_select_left             ),
-    .mem_address_a                  (mem_address_left[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_left             ),
     .mem_write_n_a                  (mem_write_n[4]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[4]           ),
     .row_select_a                   (row_select_left              ),
     .col_select_a                   (col_select_left              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_left[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_left                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[4]           ),
     .row_col_select_a               (row_col_select[4]            ), 
     .output_active_a                (output_active_left           ),
     .inverter_select_a              (inverter_select[4]           ),
@@ -462,15 +430,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[5]                 ),
     .clock_a                        (clock_out[5]                 ),
-    .mask_select_a                  (mask_select_right             ),
-    .mem_address_a                  (mem_address_right[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_right             ),
     .mem_write_n_a                  (mem_write_n[5]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[5]           ),
     .row_select_a                   (row_select_right              ),
     .col_select_a                   (col_select_right              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_right[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_right                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[5]           ),
     .row_col_select_a               (row_col_select[5]            ), 
     .output_active_a                (output_active_right           ),
     .inverter_select_a              (inverter_select[5]           ),
@@ -492,15 +456,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[6]                 ),
     .clock_a                        (clock_out[6]                 ),
-    .mask_select_a                  (mask_select_right             ),
-    .mem_address_a                  (mem_address_right[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_right             ),
     .mem_write_n_a                  (mem_write_n[6]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[6]           ),
     .row_select_a                   (row_select_right              ),
     .col_select_a                   (col_select_right              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_right[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_right                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[6]           ),
     .row_col_select_a               (row_col_select[6]            ), 
     .output_active_a                (output_active_right           ),
     .inverter_select_a              (inverter_select[6]           ),
@@ -522,15 +482,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[7]                 ),
     .clock_a                        (clock_out[7]                 ),
-    .mask_select_a                  (mask_select_right             ),
-    .mem_address_a                  (mem_address_right[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_right             ),
     .mem_write_n_a                  (mem_write_n[7]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[7]           ),
     .row_select_a                   (row_select_right              ),
     .col_select_a                   (col_select_right              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_right[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_right                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[7]           ),
     .row_col_select_a               (row_col_select[7]            ), 
     .output_active_a                (output_active_right           ),
     .inverter_select_a              (inverter_select[7]           ),
@@ -552,15 +508,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[8]                 ),
     .clock_a                        (clock_out[8]                 ),
-    .mask_select_a                  (mask_select_right             ),
-    .mem_address_a                  (mem_address_right[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_right             ),
     .mem_write_n_a                  (mem_write_n[8]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[8]           ),
     .row_select_a                   (row_select_right              ),
     .col_select_a                   (col_select_right              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_right[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_right                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[8]           ),
     .row_col_select_a               (row_col_select[8]            ), 
     .output_active_a                (output_active_right           ),
     .inverter_select_a              (inverter_select[8]           ),
@@ -582,15 +534,11 @@ module user_project_wrapper #(
 `endif
     .clock                          (clock_out[9]                 ),
     .clock_a                        (clock_out[9]                 ),
-    .mask_select_a                  (mask_select_right             ),
-    .mem_address_a                  (mem_address_right[MEM_ADDRESS_LENGTH-1:0]),
+    .mem_address_a                  (mem_address_right             ),
     .mem_write_n_a                  (mem_write_n[9]               ),
-    .mem_dot_write_n_a              (mem_dot_write_n[9]           ),
     .row_select_a                   (row_select_right              ),
     .col_select_a                   (col_select_right              ),
-    .mem_sel_col_address_a          (mem_sel_col_address_right[MEM_ADDRESS_LENGTH-1:0]),
     .data_in_a                      (data_out_right                ),
-    .mem_sel_write_n_a              (mem_sel_write_n[9]           ),
     .row_col_select_a               (row_col_select[9]            ), 
     .output_active_a                (output_active_right           ),
     .inverter_select_a              (inverter_select[9]           ),
