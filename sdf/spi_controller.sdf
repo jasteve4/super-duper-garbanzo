@@ -1,7 +1,7 @@
 (DELAYFILE
  (SDFVERSION "3.0")
  (DESIGN "spi_controller")
- (DATE "Sat Aug 27 01:08:10 2022")
+ (DATE "Mon Aug 29 20:28:26 2022")
  (VENDOR "Parallax")
  (PROGRAM "STA")
  (VERSION "2.3.1")
